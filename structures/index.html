@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consolidated Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgba(198, 210, 214, 0.29);
+        }
+        .container {
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 0;
+            box-shadow: 1px 1px 10px #000000;
+            background: linear-gradient(0deg, rgba(0,0,0,1) 50%, rgb(0, 36, 103) 98%);
+            max-width: 1000px;
+        }
+        h1 {
+            font-family: 'Arial', sans-serif;
+            font-size: 40px;
+            color: #ffffff;
+            text-align: center;
+            margin-top: 20px;
+        }
+        p {
+            font-family: 'Arial', sans-serif;
+            font-size: 20px;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .card {
+            width: 10rem;
+            height: 10rem;
+            margin: 10px;
+        }
+        .card-body {
+            text-align: center;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="margin-bottom: 10px; ">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item" style="font-size: 20px">
+                    <a class="nav-link active" href="#" onclick="showSection('welcome')">Home</a>
+                </li>
+                <li class="nav-item" style="font-size: 20px">
+                    <a class="nav-link" href="#" onclick="showSection('products')">Products</a>
+                </li>
+                <li class="nav-item" style="font-size: 20px">
+                    <a class="nav-link" href="#" onclick="showSection('customers')">Customers</a>
+                </li>
+                <li class="nav-item" style="font-size: 20px">
+                    <a class="nav-link" href="#" onclick="showSection('orders')">Orders</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Welcome Section -->
+<div class="container text-center" id="welcome" style="padding: 30px; margin-top: -60px;">
+    <h1 class="maintag" style="font-size: 76px;">Welcome!</h1>
+    <p style="font-size: 26px;margin-top: -20px">We’re glad to have you here.</p>
+
+    <div class="d-flex flex-wrap justify-content-center" style="margin: 20px;">
+        <div class="card" style="width: 15rem; margin: 20px; ">
+            <img src="../assets/images/icons/img_5.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <a href="#" class="btn btn-primary" onclick="showSection('products')" style="width: 100%; border-radius: 0;">Items</a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 15rem; margin: 20px; ">
+            <img src="../assets/images/icons/img_7.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <a href="#" class="btn btn-primary" onclick="showSection('customers')" style="width: 100%; border-radius: 0;">Customers</a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 15rem; margin: 20px; ">
+            <img src="../assets/images/icons/img_11.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <a href="#" class="btn btn-primary" onclick="showSection('orders')" style="width: 100%; border-radius: 0;">Orders</a>
+            </div>
+        </div>
+        <div class="card" style="width: 10rem; margin-top: 40px; ">
+            <img src="../assets/images/icons/img_11.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h3 class="card-title" id="income" style="color: white; font-weight: bold;">0$</h3>
+            </div>
+        </div>
+
+        <div class="card" style="width: 10rem; margin-top: 40px;">
+            <img src="../assets/images/icons/img_13.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h3 class="card-title" id="customerCount" style="color: white; font-weight: bold;">0</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cashier Section -->
+<div class="container text-center hidden" id="orders">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <label class="form-label text-white">Customer Contact:</label>
+            <input type="text" class="form-control" placeholder="mobile" id="oCustomer">
+        </div>
+            <div class="col-md-6">
+                <label class="form-label text-white">Customer Name:</label>
+                <input type="text" class="form-control" placeholder="name" id="oCustomerName">
+            </div>
+        </div>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <label class="form-label text-white">Product ID:</label>
+            <input type="text" class="form-control" placeholder="Id" id="oProduct">
+        </div>
+        <div class="col-md-6">
+            <label class="form-label text-white">Quantity:</label>
+            <input type="text" class="form-control" placeholder="qty" id="oQuantity">
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between">
+        <div>
+            <button type="button" id="order_add_button" class="btn btn-primary me-2">Add</button>
+            <button type="button" id="seeHistory" onclick="showHistory()" class="btn btn-secondary me-2">History</button>
+            <button type="button" class="btn btn-warning me-2">Clear</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+        </div>
+        <button type="button" id="show_invoice_btn" class="btn btn-success" onclick="showInvoice()">Checkout</button>
+    </div>
+
+    <table class="table mb-4" style="margin-top: 10px">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Product</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+        </tr>
+        </thead>
+        <tbody id="cashier_tbody">
+        <tr>
+            <th scope="row">1</th>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Item Section -->
+<div class="container text-center hidden" id="products">
+    <div class="input-group input-group-sm mb-3">
+        <input type="text" class="form-control" id="itemSearchInput" placeholder="Input Name/ID">
+        <button type="button" class="btn btn-success" id="itemSearchButton" style="border-radius: 0; width: 80px">Search</button>
+    </div>
+    <div class="d-flex justify-content-between mb-3">
+        <button type="button" class="btn btn-warning" id="viewAllItems" style="color: white; font-weight: bold;">View All Items</button>
+        <button type="button" class="btn btn-primary" onclick="showAddItemForm()" style="color: white; font-weight: bold;">Add New Item</button>
+    </div>
+    <div class="d-flex justify-content-start mb-3">
+        <button id="item_delete_button" type="button" class="btn btn-danger">Delete</button>
+        <button type="button" class="btn btn-success ms-2">View</button>
+    </div>
+    <table class="table">
+        <thead class="table-light">
+        <tr>
+            <th>ID</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody id="item_table_body">
+        <tr>
+            <td>1</td>
+            <td>Raththi</td>
+            <td>25</td>
+            <td>450.00</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Raththi</td>
+            <td>25</td>
+            <td>450.00</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Raththi</td>
+            <td>25</td>
+            <td>450.00</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Raththi</td>
+            <td>25</td>
+            <td>450.00</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Raththi</td>
+            <td>25</td>
+            <td>450.00</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Customer Section -->
+<div class="container text-center hidden" id="customers">
+    <div>
+        <div class="input-group input-group-sm mb-3">
+            <input type="text" class="form-control" id="customerSearchInput" placeholder="Input Name/ID/TP">
+            <button type="button" class="btn btn-success" id="customerSearchButton" style="border-radius: 0; width: 80px">Search</button>
+        </div>
+
+        <div class="d-flex justify-content-between mb-3">
+            <button type="button" id="viewAllCustomers" class="btn btn-warning" style="color: white; font-weight: bold;">View All Customers</button>
+            <button type="button" class="btn btn-primary" onclick="showAddCustomerForm()" style="font-weight: bold;">Add New Customer</button>
+        </div>
+
+        <div class="d-flex justify-content-start mb-3">
+            <button type="button" class="btn btn-danger">Delete</button>
+            <button type="button" class="btn btn-success ms-2">View</button>
+        </div>
+
+        <table class="table">
+            <thead class="table-light">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Contact</th>
+            </tr>
+            </thead>
+            <tbody id="customer_table_body">
+            <tr>
+                <td>1</td>
+                <td>Sile</td>
+                <td>Yapane</td>
+                <td>0700154684</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Anura</td>
+                <td>Trinco</td>
+                <td>0715645987</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Raththi</td>
+                <td>25</td>
+                <td>450.00</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Raththi</td>
+                <td>25</td>
+                <td>450.00</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Raththi</td>
+                <td>25</td>
+                <td>450.00</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container card hidden" id="addCustomerForm" style="width: 400px; height: 400px; left: 37%; top: 23%;">
+    <div class="card-header" style="background-color: #36c826">
+        New Customer
+    </div>
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="cName" class="form-label" style="color: white">Name :</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="cName" aria-describedby="basic-addon3 basic-addon4">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="cAddress" class="form-label" style="color: white">Address :</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="cAddress" aria-describedby="basic-addon3 basic-addon4">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="cContact" class="form-label" style="color: white">Contact :</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="cContact" aria-describedby="basic-addon3 basic-addon4">
+            </div>
+        </div>
+        <button type="button" id="customer_add_button" class="btn btn-primary" style="right: 190px; position: absolute">Save</button>
+        <button type="button" id="customer_update_btn" class="btn btn-secondary" style="right: 105px; position: absolute">Update</button>
+        <button type="button" class="btn btn-danger" onclick="hideAddCustomerForm()"  style="right: 35px; position: absolute">Close</button>
+    </div>
+</div>
+<div class="container card" id="addItemForm" style="width: 400px; height: 400px; left: 37%; top: 23%;">
+    <div class="card-header" style="background-color: #36c826">
+        New Item
+    </div>
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="product" class="form-label" style="color: white">Product :</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="product" aria-describedby="basic-addon3 basic-addon4">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="pPrice" class="form-label" style="color: white">Price :</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="pPrice" aria-describedby="basic-addon3 basic-addon4">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="pQuantity" class="form-label" style="color: white">Quantity :</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="pQuantity" aria-describedby="basic-addon3 basic-addon4">
+            </div>
+        </div>
+        <button type="button" id="item_add_button" class="btn btn-primary" style="right: 190px; position: absolute">Save</button>
+        <button type="button" id="item_update_btn" class="btn btn-secondary" style="right: 105px; position: absolute">Update</button>
+        <button type="button" class="btn btn-danger" onclick="hideAddItemForm()" style="right: 35px; position: absolute">Close</button>
+    </div>
+</div>
+<div class="container card hidden" id="invoice" style="width: 18rem;height: 330px; top: 27%; left: 40%; background-color: rgba(198,210,214,0.29)">
+    <div class="card-body"  style="text-align: left">
+        <h5 class="card-title" style="text-decoration: underline; color: white;">Order Summary</h5>
+        <br>
+        <h6 style="color: white">Date: </h6>
+        <h6 style="color: white">Time: </h6>
+        <h6 style="color: white">Item Count: </h6>
+        <h6 style="color: white">Customer: </h6>
+        <br>
+        <h6 style="color: white">Sub Total: </h6>
+        <br>
+        <a href="#" class="btn btn-danger" onclick="hideInvoice()">Cancel</a>
+        <a href="#" class="btn btn-primary" id="done" onclick="hideInvoice()" style="position: absolute; right: 10px">Done</a>
+    </div>
+</div>
+
+<div class="container text-center hidden" id="History">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <label class="form-label text-white">Customer Contact:</label>
+            <input type="text" id="customerSearchInputHistory" class="form-control" placeholder="mobile">
+        </div>
+    </div>
+
+
+    <div class="d-flex justify-content-between">
+        <div>
+            <button type="button" id="customerSearchButtonHistory" class="btn btn-secondary me-2">Search</button>
+            <button type="button" id="viewAllOrders" class="btn btn-warning me-2">View All</button>
+            <button type="button" onclick="hideHistory()" class="btn btn-danger">Close</button>
+        </div>
+    </div>
+
+    <table class="table mb-4" style="margin-top: 10px">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Date</th>
+            <th scope="col">Product</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Price</th>
+        </tr>
+        </thead>
+        <tbody id="history_tbody">
+        <tr>
+            <td>1</td>
+            <td>Mark</td>
+            <td>11/12/2022</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="../assets/lib/jquery-3.7.1.min.js"></script>
+<script>
+    function showSection(sectionId) {
+        // Hide all sections
+        document.querySelectorAll('.container').forEach(function(section) {
+            section.classList.add('hidden');
+        });
+        // Show the selected section
+        document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function showAddItemForm() {
+        document.getElementById('addItemForm').classList.remove('hidden');
+    }
+
+    function hideAddItemForm() {
+        document.getElementById('addItemForm').classList.add('hidden');
+    }
+
+    function showAddCustomerForm() {
+        document.getElementById('addCustomerForm').classList.remove('hidden');
+    }
+
+    function hideAddCustomerForm() {
+        document.getElementById('addCustomerForm').classList.add('hidden');
+    }
+
+    function showInvoice() {
+        document.getElementById('invoice').classList.remove('hidden');
+    }
+
+    function hideInvoice() {
+        document.getElementById('invoice').classList.add('hidden');
+    }
+
+    function showHistory() {
+        document.getElementById('History').classList.remove('hidden');
+    }
+
+    function hideHistory() {
+        document.getElementById('History').classList.add('hidden');
+    }
+
+    // Show the welcome section by default
+    showSection('welcome');
+</script>
+<script type="module" src="../controller/CustomerController.js"></script>
+<script type="module" src="../controller/OrderController.js"></script>
+<script type="module" src="../controller/ProductController.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
